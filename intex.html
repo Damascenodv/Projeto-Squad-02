@@ -3,10 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js">defer</script>
+    
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+
+
+    </header>
+    <main>
+        <section>
+            <h1>Parametros</h1>
+            <label for="numServidoresFisicos">Número de Servidores Físicos:</label>
+            <input type="number" id="numServidoresFisicos" name="numServidoresFisicos" value="20"><br>
+
+            <label for="numeroColaboradores">Número de Colaboradores:</label>
+            <input type="number" id="numeroColaboradores" name="numeroColaboradores" value="60"><br>
+
+            <label for="numeroSistemasUtilizados">Número de Sistemas Utilizados:</label>
+            <input type="number" id="numeroSistemasUtilizados" name="numeroSistemasUtilizados" value="5"><br>
+
+            <label for="numeroFiliais">Número de Filiais:</label>
+            <input type="number" id="numeroFiliais" name="numeroFiliais" value="5"><br>
+
+            <label for="possuiPlanoEstrategico">Possui Plano Estratégico:</label>
+            <input type="number" id="possuiPlanoEstrategico" name="possuiPlanoEstrategico" value="1"><br>
+
+            <button onclick="construirCalculo()">Construir Cálculo</button>
+            
+        </section>
+        <section> 
+            <h2>Subtitulo</h2>
+            <div id="valores"></div>
+            <button onclick="gerarPDF()">Gerar PDF</button>
+        </section>
+
+    </main>
+    <footer>
+
+    </footer>
+    <script src="index.js">defer</script>
 </body>
 </html>
