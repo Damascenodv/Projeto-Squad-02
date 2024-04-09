@@ -1,18 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-
+        <img
+        class="logoadx" 
+        src="logo-grupo-adx.png" 
+        alt="logo-grupo-adx.png">
 
     </header>
+  <div> 
     <main>
-        <section>
+        <section class="parametros">
             <h1>Parametros</h1>
             <label for="numServidoresFisicos">Número de Servidores Físicos:</label>
             <input type="number" id="numServidoresFisicos" name="numServidoresFisicos" value="20"><br>
@@ -29,14 +34,19 @@
             <label for="possuiPlanoEstrategico">Possui Plano Estratégico:</label>
             <input type="number" id="possuiPlanoEstrategico" name="possuiPlanoEstrategico" value="1"><br>
 
-            <button onclick="construirCalculo()">Construir Cálculo</button>
             
-        </section>
-        <section> 
-            <h2>Subtitulo</h2>
+         </section>
+
+        <section class="btncalculo">
+            <button onclick="construirCalculo()">Construir Cálculo</button>
+        </section> 
+
+        <section class="resultados"> 
+            <h2>Resultados</h2>
             <div id="valores"></div>
-            <button onclick="gerarPDF()">Gerar PDF</button>
+            <button onclick="gerarPDF()" class="gerarPDF">Gerar PDF</button>
         </section>
+    </div> 
 
     </main>
     <footer>
