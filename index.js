@@ -1,5 +1,3 @@
-
-
 let imposto = 0.20;
 let lucro = 0.10;
 
@@ -48,6 +46,6 @@ function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtiliz
 }
 
 function gerarPDF() {
+    window.location.href = "exemplo.html";
     window.print();
 }
-console.log(ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc));
