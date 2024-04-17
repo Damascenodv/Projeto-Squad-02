@@ -12,15 +12,15 @@ function construirCalculo(){
     let numeroColaboradores = parseInt(document.getElementById('numeroColaboradores').value);
     let numeroSistemasUtilizados = parseInt(document.getElementById('numeroSistemasUtilizados').value);
     let numeroFiliais = parseInt(document.getElementById('numeroFiliais').value);
-    let possuiPlanoEstrategioc = parseInt(document.getElementById('possuiPlanoEstrategico').value);
+    let possuiPlanoEstrategioc = document.getElementById('possuiPlanoEstrategico').checked ? 1 : 0;
 
     let valoresDiv = document.getElementById('valores');
         valoresDiv.innerHTML = `
-            <p>Horas Anlista Junior: ${horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)}</p>
-            <p>Horas Anlista Sênior: ${horasAnlistaSênior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)}</p>
-            <p>Horas Especialista: ${horasEspecialista(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)}</p>
-            <p>Custo HH: ${custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)}</p>
-            <p>Valor Venda: ${ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)}</p>
+            <p>Horas Anlista Junior: ${horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc).toFixed(1)}</p>
+            <p>Horas Anlista Sênior: ${horasAnlistaSênior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc).toFixed(1)}</p>
+            <p>Horas Especialista: ${horasEspecialista(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc).toFixed(1)}</p>
+            <p>Custo HH: ${custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+            <p>Valor Venda: ${ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
         `;
 }
 
