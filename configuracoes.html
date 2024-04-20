@@ -9,59 +9,95 @@
     </head>
     <body>
         <header>
-            <div class="navbar">
-                <img src="logo.webp" class="logoadx" alt="logo-grupo-adx.png">
+            <div class="navbar ">
+                <section class="title col-5" style="width: 100%;">
+                    <a href="index.html" ><img src="logo.webp" class="logoadx"  alt="logo-grupo-adx.png"></a>
+                    <h4 class="titulo_pagina" >Configurações de parametros fixos</h4>
+                </section>
     
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="configurações.html">Configurações</a>
-                    </li>
-                </ul>
+
             </div>
         </header>
 <body>
-    <h2>Calculadora de Salário</h2>
-    <form>
-        <div>
-            <label for="imposto">Imposto (%):</label>
-            <input type="number" id="imposto" name="imposto" step="0.01" value="20">
+<br /><br />
+    <main>
+
+    <form >
+        <h3>Multiplicadores:</h3>
+        <div class="input-group mb-3" style="width: 40%;">
+            <span class="input-group-text" >Imposto (%):</span>
+            <input type="number" class="form-control" id="imposto" name="imposto" step="0.01" value="20">
         </div>
-        <div>
-            <label for="lucro">Lucro (%):</label>
-            <input type="number" id="lucro" name="lucro" step="0.01" value="10">
+        <div class="input-group mb-3"  style="width: 40%;">
+            <span class="input-group-text">Lucro (%):</span>
+            <input type="number" class="form-control" id="lucro" name="lucro" step="0.01" value="10">
         </div>
         <h3>Salários por Cargo:</h3>
-        <div>
-            <label for="analistaJR">Analista Júnior:</label>
-            <input type="number" id="analistaJR" name="analistaJR" step="0.01" value="150">
+        <div class="input-group mb-3" style="width: 40%;">
+            <span class="input-group-text">Analista Júnior:</span>
+            <input type="number" class="form-control" id="analistaJR" name="analistaJR" step="0.01" value="150">
         </div>
-        <div>
-            <label for="analistaSr">Analista Sênior:</label>
-            <input type="number" id="analistaSr" name="analistaSr" step="0.01" value="250">
+        <div class="input-group mb-3" style="width: 40%;">
+            <span class="input-group-text">Analista Sênior:</span>
+            <input type="number" class="form-control" id="analistaSr" name="analistaSr" step="0.01" value="250">
         </div>
-        <div>
-            <label for="especialista">Especialista:</label>
-            <input type="number" id="especialista" name="especialista" step="0.01" value="350">
+        <div class="input-group mb-3" style="width: 40%;">
+            <span class="input-group-text">Especialista:</span>
+            <input type="number" class="form-control" id="especialista" name="especialista" step="0.01" value="350">
         </div>
-        <div>
-            <button id="calculateButton">Construir Cálculo</button>
+        <div class="input-group mb-3" style="width: 40%;">
+            <button id="calculateButton" class="btn btn-primary">Salvar Configurações</button>
         </div>
     </form>
+</main>
 
-    <script>
-        document.getElementById("calculateButton").addEventListener("click", function(event) {
-            saveDataToLocalStorage();
-            redirectToPage();
-            event.preventDefault(); 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const imposto = localStorage.getItem("imposto") || 20;
+    const lucro = localStorage.getItem("lucro") || 10;
+    const analistaJR = localStorage.getItem("analistaJR") || 150;
+    const analistaSr = localStorage.getItem("analistaSr") || 250;
+    const especialista = localStorage.getItem("especialista") || 350;
+
+    document.getElementById("imposto").value = imposto;
+    document.getElementById("lucro").value = lucro;
+    document.getElementById("analistaJR").value = analistaJR;
+    document.getElementById("analistaSr").value = analistaSr;
+    document.getElementById("especialista").value = especialista;
+
+    document.querySelectorAll("input[type='number']").forEach(function(input) {
+        input.addEventListener("change", function() {
+            localStorage.setItem(this.id, this.value);
         });
+    });
 
-        function redirectToPage() {
-            window.location.href = "index.html"; 
-        }
-    </script>
+            document.getElementById("calculateButton").addEventListener("click", function(event) {
+                saveDataToLocalStorage();
+                redirectToPage();
+                event.preventDefault(); 
+            });
+    
+            function redirectToPage() {
+                window.location.href = "index.html"; 
+            }
+});
+</script>
+        <script>
+        
+
+
+            document.getElementById("calculateButton").addEventListener("click", function(event) {
+                saveDataToLocalStorage();
+                redirectToPage();
+                event.preventDefault(); 
+            });
+    
+            function redirectToPage() {
+                window.location.href = "index.html"; 
+            }
+        </script>
     </form>
 </body>
 </html>
