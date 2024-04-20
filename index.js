@@ -69,6 +69,6 @@ function limpar(){
     document.getElementById('numeroColaboradores').value="";
     document.getElementById('numeroSistemasUtilizados').value = "";
     document.getElementById('numeroFiliais').value = "";
-    document.getElementById('possuiPlanoEstrategico') = 0;
+    document.getElementById('possuiPlanoEstrategico').checked = false;
 
 }
