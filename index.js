@@ -1,9 +1,9 @@
-let imposto = 0.20;
-let lucro = 0.10;
+let imposto = localStorage.getItem('imposto') /100;
+let lucro = localStorage.getItem('lucro') /100;
 
-let analistaJR = 150.00;
-let analistaSr = 250.00;
-let especialista = 350.00;
+let analistaJR = localStorage.getItem('analistaJR');
+let analistaSr = localStorage.getItem('analistaSr');
+let especialista = localStorage.getItem('especialista');
 
 function construirCalculo(){
     let numServioresFisicos = parseInt(document.getElementById('numServidoresFisicos').value);
@@ -48,4 +48,27 @@ function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtiliz
 function gerarPDF() {
     window.location.href = "exemplo.html";
     window.print();
+}
+function saveDataToLocalStorage() {
+        
+    
+
+    localStorage.setItem("imposto", document.getElementById("imposto").value);
+    localStorage.setItem("lucro", document.getElementById("lucro").value);
+    localStorage.setItem("analistaJR", document.getElementById("analistaJR").value);
+    localStorage.setItem("analistaSr", document.getElementById("analistaSr").value);
+    localStorage.setItem("especialista", document.getElementById("especialista").value);
+
+    window.location.href = "index.html";
+    window.print();
+    
+}
+
+function limpar(){
+    document.getElementById('numServidoresFisicos').value = "";
+    document.getElementById('numeroColaboradores').value="";
+    document.getElementById('numeroSistemasUtilizados').value = "";
+    document.getElementById('numeroFiliais').value = "";
+    document.getElementById('possuiPlanoEstrategico') = 0;
+
 }
