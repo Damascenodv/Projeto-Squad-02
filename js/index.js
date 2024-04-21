@@ -5,14 +5,26 @@ let analistaJR = localStorage.getItem('analistaJR');
 let analistaSr = localStorage.getItem('analistaSr');
 let especialista = localStorage.getItem('especialista');
 
+
+function camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
+    
+    console.log(numServioresFisicos == NaN )
+    if((numServioresFisicos == 0 || numeroColaboradores == 0 || numeroSistemasUtilizados == 0 || numeroFiliais == 0 || possuiPlanoEstrategioc == 0) ||(numServioresFisicos == "" || numeroColaboradores == '' || numeroSistemasUtilizados == '' || numeroFiliais == '' || possuiPlanoEstrategioc == '')){
+        return false;
+    }
+    return true; 
+}
 function construirCalculo(){
+
+    
     let numServioresFisicos = parseInt(document.getElementById('numServidoresFisicos').value);
     let numeroColaboradores = parseInt(document.getElementById('numeroColaboradores').value);
     let numeroSistemasUtilizados = parseInt(document.getElementById('numeroSistemasUtilizados').value);
     let numeroFiliais = parseInt(document.getElementById('numeroFiliais').value);
     let possuiPlanoEstrategioc = document.getElementById('possuiPlanoEstrategico').checked ? 1 : 0;
-
     
+
+    if(camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)){
 
     let resultHorasAnlistaJunior = horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
     let resultHorasAnlistaSenior = horasAnlistaSênior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
@@ -30,6 +42,10 @@ function construirCalculo(){
             <p>Custo HH: ${localStorage.getItem("resultCustoHHF")}</p>
             <p>Valor Venda: ${localStorage.getItem("resultValorVendaF")}</p>
         `;
+
+    }else{
+        alert('Preencha todos os campos');
+    }    
 }
 
 function horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
