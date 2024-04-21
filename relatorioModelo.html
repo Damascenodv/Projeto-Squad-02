@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="Relatorio">
+    <table id="localStorageTable" border="1">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const localStorageData = [
+            { key: "Horas Anlista Junior ", value: localStorage.getItem("HorasAnlistaJuniorF") },
+            { key: "Horas Anlista Senior", value: localStorage.getItem("HorasAnlistaSeniorF") },
+            { key: "Horas Especialista", value: localStorage.getItem("HorasEspecialistaF") },
+            { key: "CustoHH", value: localStorage.getItem("resultCustoHHF") },
+            { key: "Valor da Venda", value: localStorage.getItem("resultValorVendaF") }
+        ];
+
+        const tableBody = document.querySelector("#localStorageTable tbody");
+
+        localStorageData.forEach(item => {
+            const row = tableBody.insertRow();
+            const keyCell = row.insertCell(0);
+            const valueCell = row.insertCell(1);
+
+            keyCell.textContent = item.key;
+            valueCell.textContent = item.value;
+        });
+    </script>
+    </div>
+</body>
+<script src="relatorio.js">defer</script>
+<script src="index.js">defer</script>
+</html>
