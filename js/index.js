@@ -25,8 +25,8 @@ function construirCalculo(){
     let valoresDiv = document.getElementById('valores');
         valoresDiv.innerHTML = `
             <p>Horas Anlista Junior: ${localStorage.getItem("HorasAnlistaJuniorF")}</p>
-            <p>Horas Anlista Sênior: ${localStorage.getItem("HorasAnlistaJuniorF")}</p>
-            <p>Horas Especialista: ${localStorage.getItem("HorasAnlistaJuniorF")}</p>
+            <p>Horas Anlista Sênior: ${localStorage.getItem("HorasAnlistaSeniorF")}</p>
+            <p>Horas Especialista: ${localStorage.getItem("HorasEspecialistaF")}</p>
             <p>Custo HH: ${localStorage.getItem("resultCustoHHF")}</p>
             <p>Valor Venda: ${localStorage.getItem("resultValorVendaF")}</p>
         `;
@@ -56,9 +56,9 @@ function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtiliz
 }
 
 function gerarPDF() {
-
+    construirCalculo()
     const printWindow = window.open('relatorioModelo.html', '_blank');
-    printWindow.print();
+    //printWindow.print();
 }
 function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda){
     localStorage.setItem("HorasAnlistaJuniorF", resultHorasAnlistaJunior.toFixed(1));
