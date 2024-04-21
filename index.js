@@ -58,7 +58,6 @@ function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtiliz
 function gerarPDF() {
 
     const printWindow = window.open('relatorioModelo.html', '_blank');
-
     printWindow.print();
 }
 function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda){
