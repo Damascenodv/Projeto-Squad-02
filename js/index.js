@@ -42,6 +42,8 @@ function construirCalculo(){
             <p>Custo HH: ${localStorage.getItem("resultCustoHHF")}</p>
             <p>Valor Venda: ${localStorage.getItem("resultValorVendaF")}</p>
         `;
+        var myModal = new bootstrap.Modal(document.getElementById('modalValores'));
+        myModal.show();
 
     }else{
         alert('Preencha todos os campos');
