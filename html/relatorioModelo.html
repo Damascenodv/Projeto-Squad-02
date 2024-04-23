@@ -8,21 +8,55 @@
 
 </head>
 <body>
+    <div class="headerPdf">
+        <img src="../assets/logo-grupo-adx.png" alt="LOGO" srcset="">
+
+        <h1>ADX</h1>
+        <div></div>
+    </div>
+    <div class="clientInformation">
+        <div class="clientName">
+
+            <h3>Cliente: </h3>
+            <p id="userName">Adriano</p>
+
+        </div>
+        <div class="clientName">
+
+            <h3>Data:</h3>
+            <p id="dateDay"> 22/04/2024</p>
+
+        </div>
+    </div>
+
     <div id="Relatorio">
-        <h1>Relatorio Gastos</h1>
-        <br /><br />
+        <h1 class="relatorioName">RELATÓRIO DE CUSTOS</h1>
+        
     <table id="localStorageTable" border="1">
         <thead>
             <tr>
-                <th>Variáveis</th>
-                <th>Cálculos</th>
+                <th class="stylecolumn">Variáveis</th>
+                <th class="stylecolumn">Cálculos</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
+    <div class="totalValue">
+        <div class="valueStyle">
+            <h3 class="valueLabel">Valor da Venda: </h3>
+            <div class="blackbar"></div>
+            <p id="valorTotalVenda" class="valueLabel">R$ 120,000</p>
+        </div>
+    </div>
 
-    <script>
+    <div class="observationContent">
+      <h3 class="observationText">OBSERVAÇÕES</h3>
+      <p>Tres pratos de trigo para tres trigues tristes</p>  
+    </div>    
+    
+
+<script>
         const localStorageData = [
             { Variáveis: "Horas Anlista Junior ", Cálculos: localStorage.getItem("HorasAnlistaJuniorF") },
             { Variáveis: "Horas Anlista Senior", Cálculos: localStorage.getItem("HorasAnlistaSeniorF") },
@@ -30,7 +64,6 @@
             { Variáveis: "Custo HH", Cálculos: localStorage.getItem("resultCustoHHF") },
             { Variáveis: "Impostos", Cálculos: localStorage.getItem("imposto")+'%' },
             { Variáveis: "Lucro", Cálculos: localStorage.getItem("lucro")+"%" },
-            { Variáveis: "Valor da Venda", Cálculos: localStorage.getItem("resultValorVendaF") }
         ];
 
         const tableBody = document.querySelector("#localStorageTable tbody");
@@ -43,6 +76,9 @@
             keyCell.textContent = item.Variáveis;
             valueCell.textContent = item.Cálculos;
         });
+
+        const totalValue = document.getElementById("valorTotalVenda")
+        totalValue.textContent = localStorage.getItem("resultValorVendaF")
 
         
     </script>

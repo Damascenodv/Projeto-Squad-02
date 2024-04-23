@@ -1,16 +1,55 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
 }
-#Relatorio {
-    max-width: 800px;
-    margin: 0 auto;
+
+.headerPdf {
+    padding: 1% 12% 8% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
 }
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.headerPdf h1{
+    display: flex;
+    justify-content: center;
+    font-size: 3vh;
 }
+
+.headerPdf img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10%;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray; /* IE */
+}
+
+.clientInformation{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.clientName{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+#userName{
+    width: 300px;
+    border-bottom: 2px solid black;
+}
+#dateDay{
+    border-bottom: 2px solid black;
+
+}
+.relatorioName{
+    display: flex;
+    justify-content: center;
+    padding: 3% 0% 0% 0%;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -21,7 +60,7 @@ th, td {
     border: 1px solid #ddd;
 }
 th {
-    background-color: #f2f2f2;
+    background-color: rgba(128, 128, 128, 0.706);
     font-weight: bold;
     text-align: left;
 }
@@ -31,4 +70,41 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #f2f2f2;
 }
+.observationContent{
+    margin-top: 10%;
+    
+    border: 1px solid black;
+}
+.observationText{
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background-color: rgba(128, 128, 128, 0.706);
+}
+.observationContent p{
+    padding-left: 10px;
+}
+.totalValue{
+    gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.valueStyle{
+    display: flex;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0% 1% 0% 1%;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+}
 
+.blackbar {
+    width: 1px;
+    height: 30px;
+    border-right: 1px solid black;
+}
+.valueLabel{
+    margin: 0;
+}
