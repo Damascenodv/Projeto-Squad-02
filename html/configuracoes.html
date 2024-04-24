@@ -66,18 +66,19 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-    const imposto = localStorage.getItem("imposto") || 20;
-    const lucro = localStorage.getItem("lucro") || 10;
-    const analistaJR = localStorage.getItem("analistaJR") || 150;
-    const analistaSr = localStorage.getItem("analistaSr") || 250;
-    const especialista = localStorage.getItem("especialista") || 350;
+    const imposto = localStorage.getItem("imposto") ;
+    const lucro = localStorage.getItem("lucro") ;
+    const analistaJR = localStorage.getItem("analistaJR");
+    const analistaSr = localStorage.getItem("analistaSr");
+    const especialista = localStorage.getItem("especialista");
+     
 
     document.getElementById("imposto").value = imposto;
     document.getElementById("lucro").value = lucro;
     document.getElementById("analistaJR").value = analistaJR;
     document.getElementById("analistaSr").value = analistaSr;
     document.getElementById("especialista").value = especialista;
-
+ 
     document.querySelectorAll("input[type='number']").forEach(function(input) {
         input.addEventListener("change", function() {
             localStorage.setItem(this.id, this.value);
@@ -85,30 +86,22 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
             document.getElementById("calculateButton").addEventListener("click", function(event) {
+                if(isCamposPrechidosConfiguracoes(document.getElementById("imposto").value ,document.getElementById("lucro").value ,document.getElementById("analistaJR").value ,document.getElementById("analistaSr").value,document.getElementById("especialista").value)){
                 saveDataToLocalStorage();
                 redirectToPage();
                 event.preventDefault(); 
+                }else{
+                    alert("Todos os campos devem ser preenchidos !");
+                }
+                
             });
     
             function redirectToPage() {
-                window.location.href = "index.html"; 
+                    window.location.href = "index.html"; 
+   
             }
 });
 </script>
-        <script>
-        
-
-
-            document.getElementById("calculateButton").addEventListener("click", function(event) {
-                saveDataToLocalStorage();
-                redirectToPage();
-                event.preventDefault(); 
-            });
-    
-            function redirectToPage() {
-                window.location.href = "index.html"; 
-            }
-        </script>
     </form>
 </body>
 </html>

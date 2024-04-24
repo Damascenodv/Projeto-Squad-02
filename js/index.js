@@ -14,6 +14,60 @@ function camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasU
     }
     return true; 
 }
+
+function camposPrechidosConfiguracoes(){
+
+    /*const imposto = localStorage.getItem("imposto");
+    const lucro = localStorage.getItem("lucro");
+    const analistaJR = localStorage.getItem("analistaJR");
+    const analistaSr = localStorage.getItem("analistaSr");
+    const especialista = localStorage.getItem("especialista");*/
+    
+    console.log(imposto == NaN, imposto )
+    if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
+    ||(imposto == "" || lucro == '' || analistaJR == '' || especialista == '' 
+    ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
+
+        localStorage.setItem("imposto", 20);
+        localStorage.setItem("lucro", 10);
+        localStorage.setItem("analistaJR", 150);
+        localStorage.setItem("analistaSr", 250);
+        localStorage.setItem("especialista", 350);
+        
+    }
+}
+
+function camposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista){
+
+    
+    console.log(imposto == NaN, imposto )
+    if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
+    ||(imposto == '' || lucro == '' || analistaJR == '' || especialista == '' 
+    ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
+
+        localStorage.setItem("imposto", 20);
+        localStorage.setItem("lucro", 10);
+        localStorage.setItem("analistaJR", 150);
+        localStorage.setItem("analistaSr", 250);
+        localStorage.setItem("especialista", 350);
+        return false;
+        
+    }
+    return true;
+}
+function isCamposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista){
+
+    
+    console.log(imposto == NaN, imposto )
+    if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
+    ||(imposto == '' || lucro == '' || analistaJR == '' || especialista == '' 
+    ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
+
+        return false;
+        
+    }
+    return true;
+}
 function construirCalculo(){
 
     
@@ -23,6 +77,9 @@ function construirCalculo(){
     let numeroFiliais = parseInt(document.getElementById('numeroFiliais').value);
     let possuiPlanoEstrategioc = document.getElementById('possuiPlanoEstrategico').checked ? 1 : 0;
     
+    
+
+    camposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista)
 
     if(camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)){
 
@@ -70,6 +127,7 @@ function custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizado
     ( horasEspecialista(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc) * especialista );
 }
 function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
+    console.log(imposto)
     return (custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)/(1-(imposto+lucro)));
 }
 
@@ -101,8 +159,10 @@ function saveDataToLocalStorage() {
         localStorage.setItem("analistaJR", document.getElementById("analistaJR").value);
         localStorage.setItem("analistaSr", document.getElementById("analistaSr").value);
         localStorage.setItem("especialista", document.getElementById("especialista").value);
-    
+        
         window.location.href = "index.html";
+        
+        
         
         
 }
