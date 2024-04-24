@@ -56,7 +56,7 @@ main{
     
 }
 
-h1,h2,h3,h4,h5,h6{
+h2,h4,h5,h6{
     color: #ffffff;
 }
 .titulo_pagina{
@@ -69,7 +69,7 @@ h1,h2,h3,h4,h5,h6{
 
 .button-link {
     display: inline-block;
-    padding: 8px 16px; 
+    padding: 6px 12px; 
     border-radius: 4px; 
     background-color: #fa5151;
     color: #ffffff; 
@@ -120,4 +120,34 @@ h5 {
 #btnLimpar {
     background-color: #fa5151;
     color: #ffffff;
+}
+h1, h3 {
+    color: #12374a;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #12374a;
+}
+h3 {
+    font-size: 22px;
+}
+.container {
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+.btn-custom {
+    color: #12374a;
+    text-decoration: none;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+li {
+    list-style: none;
+}
+#alinharbtn {
+    display: flex;
+    gap: 8px;
 }
