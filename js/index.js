@@ -155,8 +155,18 @@ function ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtiliz
     console.log(imposto)
     return (custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)/(1-(imposto+lucro)));
 }
+function gerarPDFoutraPagina() {
+    calcularObjeto()
+    if(camposPrechidos()){
+    const printWindow = window.open('relatorioModelo.html', '_blank'); 
+    }
+}
 
 function gerarPDF() {
+    gerarPDFFlutuante()
+  
+}
+function gerarPDFFlutuante() {
 
     calcularObjeto()
     
@@ -172,7 +182,6 @@ function gerarPDF() {
     }
   
 }
-
 function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda){
     localStorage.setItem("HorasAnlistaJuniorF", resultHorasAnlistaJunior.toFixed(1));
     localStorage.setItem("HorasAnlistaSeniorF", resultHorasAnlistaSenior.toFixed(1));
