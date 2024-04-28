@@ -19,11 +19,7 @@
         <div class="navbar">
             <img src="../assets/logo.webp" class="logoadx" alt="logo-grupo-adx.png">
 
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="configuracoes.html">Configurações</a>
-                </li>
-            </ul>
+ 
         </div>
     </header>
     <div>
@@ -87,10 +83,8 @@
                                                     </div>
                                                     <div>
                                                         <div>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link button-link"
-                                                                    href="index.html">Cancelar</a>
-                                                            </li>
+                                                            <button id="cancelateButton" 
+                                                                class="btn btn-secondary">Cancelar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,13 +145,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Resumo de Informações:</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div id="valores"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             <button onclick="gerarPDF()" class="btn btn-primary gerarPDF">PDF</button>
                         </div>
                     </div>
@@ -197,11 +191,7 @@
             document.getElementById("analistaSr").value = analistaSr;
             document.getElementById("especialista").value = especialista;
          
-            document.querySelectorAll("input[type='number']").forEach(function(input) {
-                input.addEventListener("change", function() {
-                    localStorage.setItem(this.id, this.value);
-                });
-            });
+
         
                     document.getElementById("calculateButton").addEventListener("click", function(event) {
                         if(isCamposPrechidosConfiguracoes(document.getElementById("imposto").value ,document.getElementById("lucro").value ,document.getElementById("analistaJR").value ,document.getElementById("analistaSr").value,document.getElementById("especialista").value)){
@@ -213,6 +203,22 @@
                         }
                         
                     });
+                    document.getElementById("cancelateButton").addEventListener("click", function(event) {
+                        const imposto = localStorage.getItem("imposto") ;
+                        const lucro = localStorage.getItem("lucro") ;
+                        const analistaJR = localStorage.getItem("analistaJR");
+                        const analistaSr = localStorage.getItem("analistaSr");
+                        const especialista = localStorage.getItem("especialista");
+                        
+                    
+                        document.getElementById("imposto").value = imposto;
+                        document.getElementById("lucro").value = lucro;
+                        document.getElementById("analistaJR").value = analistaJR;
+                        document.getElementById("analistaSr").value = analistaSr;
+                        document.getElementById("especialista").value = especialista;
+                        
+                    });
+                    function reeprencherCampos(){}
             
                     function redirectToPage() {
                             window.location.href = "index.html"; 
