@@ -115,7 +115,28 @@ function calcularObjeto(){
 }
 
 
-
+function calcularObjetoLocalHost(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc,impostop,lucrop,analistaJRp,analistaSrp,especialistap){
+    
+       camposPrechidosConfiguracoes(impostop,lucrop,analistaJRp,analistaSrp,especialistap)
+	
+   if(camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)){
+   let resultHorasAnlistaJunior = horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+     let resultHorasAnlistaSenior = horasAnlistaSênior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+     let resultHorasEspecialista = horasEspecialista(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+     let resultCustoHH = custoHH(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+     let resultValorVenda = ValorVenda(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+         console.log(resultHorasAnlistaJunior);
+     	 console.log(resultHorasAnlistaSenior);
+    	    console.log(resultHorasEspecialista);
+    	    console.log(resultCustoHH);
+    	    console.log(resultValorVenda);
+    	
+    	
+    	    salvarCalculolocalHost(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
+    	    }else{
+    	    alert('Preencha todos os campos');
+    	    }    
+    	}
 
 
 function construirCalculo(){
@@ -142,12 +163,16 @@ function enviarDadosParaServidor(){
     .then(response => response.json())
     .then(data => {
         console.log(data.length); 
+       
+              
         if(data.length >0){
-            
-            enviarDadosParaServidorPut()
+            calcularObjetoLocalHost(data[0].numServioresFisicos,data[0].numeroColaboradores,data[0].numeroSistemasUtilizados,data[0].numeroFiliais,data[0].possuiPlanoEstrategioc,data[0].imposto,data[0].lucro,data[0].analistaJR,data[0].analistaSr,data[0].especialista)
+            enviarDadosParaServidorPut(data[0].codigo)
+
         }else{
             enviarDadosParaServidorPost()
         }
+        
         return data;
     })
     .catch(error => {
@@ -155,7 +180,7 @@ function enviarDadosParaServidor(){
     });
 
 }
-function enviarDadosParaServidorPut() {
+function enviarDadosParaServidorPut(codigo) {
     dado = localStorage.getItem("parametros")
     console.log(dado[1] + dado[2]+ dado[3], 'aqui');
     if (true) {
@@ -174,7 +199,7 @@ function enviarDadosParaServidorPut() {
         };
         console.log(dados,localStorage.getItem('numServioresFisicos'))
 
-        fetch('http://localhost:8082/Parametros/1', {
+        fetch('http://localhost:8082/Parametros/'+codigo, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -308,6 +333,29 @@ function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSe
     localStorage.setItem("resultCustoHH", resultCustoHH);
     localStorage.setItem("resultValorVenda", resultValorVenda);
     enviarDadosParaServidor()
+
+}
+function salvarCalculolocalHost(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
+    localStorage.setItem('numServioresFisicos',numServioresFisicos);
+    localStorage.setItem('numeroColaboradores',numeroColaboradores);
+    localStorage.setItem('numeroSistemasUtilizados',numeroSistemasUtilizados);
+    localStorage.setItem('numeroFiliais',numeroFiliais);
+    localStorage.setItem('possuiPlanoEstrategico',possuiPlanoEstrategioc);
+    
+
+
+
+    localStorage.setItem("HorasAnlistaJuniorF", resultHorasAnlistaJunior.toFixed(1));
+    localStorage.setItem("HorasAnlistaSeniorF", resultHorasAnlistaSenior.toFixed(1));
+    localStorage.setItem("HorasEspecialistaF", resultHorasEspecialista.toFixed(1));
+    localStorage.setItem("resultCustoHHF", resultCustoHH.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+    localStorage.setItem("resultValorVendaF", resultValorVenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+
+    localStorage.setItem("HorasAnlistaJunior", resultHorasAnlistaJunior);
+    localStorage.setItem("HorasAnlistaSenior", resultHorasAnlistaSenior);
+    localStorage.setItem("HorasEspecialista", resultHorasEspecialista);
+    localStorage.setItem("resultCustoHH", resultCustoHH);
+    localStorage.setItem("resultValorVenda", resultValorVenda);
 
 }
 
