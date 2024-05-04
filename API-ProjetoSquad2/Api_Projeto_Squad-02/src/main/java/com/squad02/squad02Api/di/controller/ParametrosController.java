@@ -21,23 +21,23 @@ import com.squad02.squad02Api.di.modelo.Parametros;
 @Controller
 public class ParametrosController {
 
-    Repositorio<Parametros> paremRepositorio = new ParametrosDAO();
+    Repositorio<Parametros> paramRepositorio = new ParametrosDAO();
 
     @Autowired
-    public ParametrosController(Repositorio<Parametros> paremRepositorio) {
-        this.paremRepositorio = paremRepositorio;
+    public ParametrosController(Repositorio<Parametros> paramRepositorio) {
+        this.paramRepositorio = paramRepositorio;
     }
 
     @GetMapping("/Parametros")
     @ResponseBody
     public List<Parametros> buscarPorId() {
-        return paremRepositorio.getAll();
+        return paramRepositorio.getAll();
 
     }
 
     @GetMapping("/Parametros/{id}")
     public ResponseEntity<Parametros> getMethodName(@PathVariable long id) {
-        Parametros parametros = paremRepositorio.getAllbyPK(id);
+        Parametros parametros = paramRepositorio.getAllbyPK(id);
         if (parametros != null) {
             return ResponseEntity.ok(parametros);
         }
@@ -46,21 +46,21 @@ public class ParametrosController {
 
     @PostMapping("/Parametros")
     public ResponseEntity postMethodName(@RequestBody Parametros parametros) {
-        paremRepositorio.insert(parametros);
+        paramRepositorio.insert(parametros);
         return ResponseEntity.status(HttpStatus.CREATED).body("Parametros inserida com sucesso");
     }
 
     @PutMapping("/Parametros/{id}")
     public ResponseEntity putMethodName(@PathVariable long id, @RequestBody Parametros entity) {
-        paremRepositorio.update(id, entity);
+        paramRepositorio.update(id, entity);
         return ResponseEntity.status(HttpStatus.CREATED).body("Parametros alterado com sucesso");
     }
 
     @DeleteMapping("/Parametros/{id}")
     public ResponseEntity deleEntity(@PathVariable long id) {
-        Parametros parametros = paremRepositorio.getAllbyPK(id);
+        Parametros parametros = paramRepositorio.getAllbyPK(id);
         if (parametros != null) {
-            paremRepositorio.delete(parametros);
+            paramRepositorio.delete(parametros);
             return ResponseEntity.status(HttpStatus.CREATED).body("Parametros alterado com sucesso");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body("erro ao deletar o forma de pagaemnto");

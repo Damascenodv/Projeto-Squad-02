@@ -220,8 +220,6 @@ function getDados(){
 }
 
 function enviarDadosParaServidorPut(codigo) {
-    dado = localStorage.getItem("parametros")
-    console.log(dado[1] + dado[2]+ dado[3], 'aqui');
     if (true) {
         console.log(localStorage)
         const dados = {
@@ -260,8 +258,7 @@ function enviarDadosParaServidorPut(codigo) {
     }
 }
 function enviarDadosParaServidorPost() {
-    dado = localStorage.getItem("parametros")
-    console.log(dado[1] + dado[2]+ dado[3], 'aqui');
+
     if (true) {
         console.log(localStorage)
         const dados = {

@@ -7,17 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
-import com.squad02.squad02Api.di.config.DbConfiguration;
 import com.squad02.squad02Api.di.dao.interfaces.Repositorio;
 import com.squad02.squad02Api.di.modelo.Parametros;
 
 @Component
 public class ParametrosDAO extends BaseJpqlDao implements Repositorio<Parametros> {
-    DbConfiguration dbConfiguration = new DbConfiguration();
+
+    private final String CAMPOS = " par_codigo, par_analista_jr, par_analista_sr, par_especialista,  par_imposto, par_lucro , par_num_colaboradores, par_num_servidores_fisicos, par_num_sistemas_utilizados, par_num_filias, par_num_planos_estrategico ";
 
     @Override
     public List<Parametros> getAll() {
@@ -25,7 +26,7 @@ public class ParametrosDAO extends BaseJpqlDao implements Repositorio<Parametros
         ResultSet rs = null;
         try {
             Connection conn = dbConfiguration.getConnection();
-            pStatement = conn.prepareStatement("select * from tb_par_parametro");
+            pStatement = conn.prepareStatement("select " + CAMPOS + " from tb_par_parametro");
             rs = pStatement.executeQuery();
             return resutsetTransfer(rs);
 
@@ -66,6 +67,10 @@ public class ParametrosDAO extends BaseJpqlDao implements Repositorio<Parametros
 
     @Override
     public Parametros getAllbyPK(long codigo) {
+        return manager.find(Parametros.class, codigo);
+    }
+
+    public Parametros getAllbyPK(long codigo, EntityManager manager) {
         return manager.find(Parametros.class, codigo);
     }
 
