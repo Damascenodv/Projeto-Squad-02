@@ -7,7 +7,7 @@ let especialista = localStorage.getItem('especialista');
 
 
 function camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
-    console.log('validando camposPrechidos()')
+    //console.log('validando camposPrechidos()')
     let numServpreenchido  = (isNaN(numServioresFisicos) )
     let numColabpreenchido = (isNaN(numeroColaboradores) )
     let numSistpreenchido = (isNaN(numeroSistemasUtilizados) )
@@ -26,7 +26,7 @@ function camposPrechidos(){
     let numeroFiliais = parseInt(document.getElementById('numeroFiliais').value);
     let possuiPlanoEstrategioc = document.getElementById('possuiPlanoEstrategico').checked ? 1 : 0;
     
-    console.log('validando camposPrechidos()')
+    //console.log('validando camposPrechidos()')
     let numServpreenchido  = (isNaN(numServioresFisicos) )
     let numColabpreenchido = (isNaN(numeroColaboradores) )
     let numSistpreenchido = (isNaN(numeroSistemasUtilizados) )
@@ -43,7 +43,7 @@ function camposPrechidos(){
 function camposPrechidosConfiguracoes(){
     
     
-    console.log(imposto == NaN, imposto )
+    //console.log(imposto == NaN, imposto )
     if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
     ||(imposto == "" || lucro == '' || analistaJR == '' || especialista == '' 
     ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
@@ -60,7 +60,7 @@ function camposPrechidosConfiguracoes(){
 function camposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista){
 
     
-    console.log(imposto == NaN, imposto )
+    //console.log(imposto == NaN, imposto )
     if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
     ||(imposto == '' || lucro == '' || analistaJR == '' || especialista == '' 
     ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
@@ -78,7 +78,7 @@ function camposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especi
 function isCamposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista){
 
     
-    console.log(imposto == NaN, imposto )
+    //console.log(imposto == NaN, imposto )
     if((imposto == 0 || lucro == 0 || analistaJR == 0 || analistaSr == 0 || especialista == 0) 
     ||(imposto == '' || lucro == '' || analistaJR == '' || especialista == '' 
     ||(imposto == null || lucro == null || analistaJR == null || especialista == null ))){
@@ -110,10 +110,27 @@ function calcularObjeto(){
 
     salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
     }else{
-    alert('Preencha todos os campos');
+        alert('Preencha todos os campos');
     }    
 }
+window.onload = function(){
+    getDados()
+}
+function carregarDadosBanco(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc,impostop,lucrop,analistaJRp,analistaSrp,especialistap){
+    if(localStorage.length ==0){
+        localStorage.setItem("imposto", impostop);
+        localStorage.setItem("lucro", lucrop);
+        localStorage.setItem("analistaJR", analistaJRp);
+        localStorage.setItem("analistaSr", analistaSrp);
+        localStorage.setItem("especialista", especialistap);  
+        localStorage.setItem("numServioresFisicos", numServioresFisicos);
+        localStorage.setItem("numeroColaboradores", numeroColaboradores);
+        localStorage.setItem("numeroSistemasUtilizados", numeroSistemasUtilizados);
+        localStorage.setItem("numeroFiliais", numeroFiliais);
+        localStorage.setItem("possuiPlanoEstrategioc", possuiPlanoEstrategioc);
+    }
 
+}
 
 function calcularObjetoLocalHost(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc,impostop,lucrop,analistaJRp,analistaSrp,especialistap){
     
@@ -134,7 +151,7 @@ function calcularObjetoLocalHost(numServioresFisicos,numeroColaboradores,numeroS
     	
     	    salvarCalculolocalHost(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc);
     	    }else{
-    	    alert('Preencha todos os campos');
+    	     alert('Preencha todos os campos');
     	    }    
     	}
 
@@ -180,6 +197,28 @@ function enviarDadosParaServidor(){
     });
 
 }
+function getDados(){
+    return fetch('http://localhost:8082/Parametros')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.length); 
+       
+              
+        if(data.length >0){        
+            carregarDadosBanco(data[0].numServioresFisicos,data[0].numeroColaboradores,data[0].numeroSistemasUtilizados,data[0].numeroFiliais,data[0].possuiPlanoEstrategioc,data[0].imposto,data[0].lucro,data[0].analistaJR,data[0].analistaSr,data[0].especialista)
+
+        }else{
+            enviarDadosParaServidorPost();    
+            getDados();
+        }
+        
+        return data;
+    })
+    .catch(error => {
+        console.error('Erro ao recuperar os dados:', error);
+    });
+}
+
 function enviarDadosParaServidorPut(codigo) {
     dado = localStorage.getItem("parametros")
     console.log(dado[1] + dado[2]+ dado[3], 'aqui');
