@@ -18,6 +18,11 @@ import com.squad02.squad02Api.di.modelo.Parametros;
 @Component
 public class HistoricoCalculoDAO extends BaseJpqlDao implements Repositorio<HistoricoCalculo> {
 
+    private static final String SELCT_TOTALIZADORES_TELA = "SELECT COALESCE(count(hic_codigo),0) as num_registros ,\r\n"
+            + //
+            "COALESCE(sum(hic_valor_venda)/(SELECT(count(hic_codigo))),0) as media\r\n" + //
+            "FROM tb_hic_historico_calculo hic";
+
     @Override
     public List<HistoricoCalculo> getAll() {
         PreparedStatement pStatement = null;
@@ -27,6 +32,28 @@ public class HistoricoCalculoDAO extends BaseJpqlDao implements Repositorio<Hist
             pStatement = conn.prepareStatement("select  * from tb_hic_historico_calculo");
             rs = pStatement.executeQuery();
             return resutsetTransfer(rs);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Double[] mediaAnual() {
+        PreparedStatement pStatement = null;
+        ResultSet rs = null;
+        try {
+            Connection conn = dbConfiguration.getConnection();
+            pStatement = conn.prepareStatement(SELCT_TOTALIZADORES_TELA);
+
+            rs = pStatement.executeQuery();
+            Double[] valores = new Double[2];
+            while (rs.next()) {
+                valores[0] = rs.getDouble("num_registros");
+                valores[1] = rs.getDouble("media");
+
+            }
+            return valores;
 
         } catch (Exception e) {
             e.printStackTrace();

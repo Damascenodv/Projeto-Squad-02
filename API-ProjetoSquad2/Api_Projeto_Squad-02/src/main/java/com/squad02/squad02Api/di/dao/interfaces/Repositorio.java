@@ -12,4 +12,5 @@ public interface Repositorio<T> {
     public T update(long codigo, T obj);
 
     public void delete(T obj);
+
 }

@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.squad02.squad02Api.di.dao.interfaces.Repositorio;
 import com.squad02.squad02Api.di.dao.requicoes.HistoricoCalculoDAO;
 import com.squad02.squad02Api.di.modelo.HistoricoCalculo;
 
 @Controller
 public class HistoricoCalculoController {
-    Repositorio<HistoricoCalculo> hicalRepositorio = new HistoricoCalculoDAO();
+    HistoricoCalculoDAO hicalRepositorio = new HistoricoCalculoDAO();
 
     @Autowired
-    public HistoricoCalculoController(Repositorio<HistoricoCalculo> hicalRepositorio) {
+    public HistoricoCalculoController(HistoricoCalculoDAO hicalRepositorio) {
         this.hicalRepositorio = hicalRepositorio;
 
     }
@@ -32,6 +31,13 @@ public class HistoricoCalculoController {
     @ResponseBody
     public List<HistoricoCalculo> buscarTodos() {
         return hicalRepositorio.getAll();
+    }
+
+    @GetMapping("/HistoricoCalculoMedia")
+    @ResponseBody
+    public Double[] consultarTodos() {
+        Double[] array = hicalRepositorio.mediaAnual();
+        return array;
     }
 
     @GetMapping("/HistoricoCalculo/{id}")
