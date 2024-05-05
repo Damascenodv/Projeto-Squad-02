@@ -169,6 +169,7 @@ function construirCalculo(){
             <p>Custo HH: ${localStorage.getItem("resultCustoHHF")}</p>
             <p>Valor Venda: ${localStorage.getItem("resultValorVendaF")}</p>
         `;
+        enviarDadosResultados()
         var myModal = new bootstrap.Modal(document.getElementById('modalValores'));
         myModal.show();
     }    
@@ -197,6 +198,42 @@ function enviarDadosParaServidor(){
     });
 
 }
+function enviarDadosResultados() {
+    if (camposPrechidos()) {
+        const dados = {
+            horasAnlistaSenior: parseFloat(localStorage.getItem("HorasAnlistaSeniorF")),
+            horasAnlistaJunior: parseFloat(localStorage.getItem("HorasAnlistaJuniorF")),
+            horasEspecialista: parseFloat(localStorage.getItem("HorasEspecialistaF")),
+            custoHH: parseFloat(localStorage.getItem("resultCustoHH")),
+            valorVenda: parseFloat(localStorage.getItem("resultValorVenda")),
+            parametro: {
+                codigo: 1,
+              
+            }
+        };
+
+        fetch('http://localhost:8082/HistoricoCalculo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Histórico inserido com sucesso!');
+            } else {
+                console.error('Erro ao enviar os dados:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao enviar os dados:', error);
+        });
+    } else {
+        alert("Todos os campos devem ser preenchidos!");
+    }
+}
+
 function getDados(){
     return fetch('http://localhost:8082/Parametros')
     .then(response => response.json())
@@ -259,7 +296,6 @@ function enviarDadosParaServidorPut(codigo) {
 }
 function enviarDadosParaServidorPost() {
 
-    if (true) {
         console.log(localStorage)
         const dados = {
             numServioresFisicos: parseInt(localStorage.getItem('numServioresFisicos')),
@@ -292,9 +328,7 @@ function enviarDadosParaServidorPost() {
         .catch(error => {
             console.error('Erro ao enviar os dados:', error);
         });
-    } else {
-        alert('Preencha todos os campos antes de enviar.');
-    }
+    
 }
 
 function horasAnlistaJunior(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){

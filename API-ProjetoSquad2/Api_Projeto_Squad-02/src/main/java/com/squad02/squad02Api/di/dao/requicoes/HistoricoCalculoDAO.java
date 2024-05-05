@@ -18,8 +18,7 @@ import com.squad02.squad02Api.di.modelo.Parametros;
 @Component
 public class HistoricoCalculoDAO extends BaseJpqlDao implements Repositorio<HistoricoCalculo> {
 
-    private static final String SELCT_TOTALIZADORES_TELA = "SELECT COALESCE(count(hic_codigo),0) as num_registros ,\r\n"
-            + //
+    private static final String SELCT_TOTALIZADORES_TELA = "SELECT COALESCE(count(hic_codigo),0) as num_registros ,\r\n"+
             "COALESCE(sum(hic_valor_venda)/(SELECT(count(hic_codigo))),0) as media\r\n" + //
             "FROM tb_hic_historico_calculo hic";
 

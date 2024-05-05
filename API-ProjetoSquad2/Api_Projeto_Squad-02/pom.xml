@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
-	<groupId>com.algaworks</groupId>
-	<artifactId>algafood-api</artifactId>
+	<groupId>com.adx</groupId>
+	<artifactId>adx-squad2-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>algafood-api</name>
-	<description>API de delivery de comida</description>
+	<name>squad2-api</name>
+	<description>calculo de folha</description>
 
 	<properties>
 		<java.version>12</java.version>
