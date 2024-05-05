@@ -360,9 +360,15 @@ function gerarPDFoutraPagina() {
     const printWindow = window.open('relatorioModelo.html', '_blank'); 
     }
 }
+function abrirRelatorio() {
+    
+    var relatorioURL = 'http://localhost:8082/relatorio';
 
+    window.open(relatorioURL);
+}
 function gerarPDF() {
-    gerarPDFFlutuante()
+    //gerarPDFFlutuante()
+    abrirRelatorio() 
   
 }
 function gerarPDFFlutuante() {

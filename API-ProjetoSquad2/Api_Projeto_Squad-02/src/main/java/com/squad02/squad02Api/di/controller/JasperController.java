@@ -30,7 +30,7 @@ public class JasperController {
     @Autowired
     private DataSource dataSource;
 
-    @GetMapping("/report")
+    @GetMapping("/relatorio")
     public void generateAndStreamReport(HttpServletResponse response) {
         try {
             ClassPathResource resource = new ClassPathResource("MyReports/Relatorio.jasper");
