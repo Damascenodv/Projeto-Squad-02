@@ -40,7 +40,6 @@ Certifique-se de ter instalado:
    ```
 
 
-
  ## Configuração do JasperSoft Studio
 
 1. **Instalação do JasperSoft Studio:**
