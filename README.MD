@@ -55,3 +55,9 @@ Certifique-se de ter instalado:
 
 
 
+## Utilização do Projeto
+   **Para utilizar o projeto:**
+   - Abra o arquivo index.html em PaginasWeb\html\index.html em seu navegador.
+   - Inicie a aplicação executando a classe com a função main em API-ProjetoSquad2\Api_Projeto_Squad-02\src\main\java\com\squad02\squad02Api\Squad2ApiApplication.java.
+
+  
