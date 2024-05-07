@@ -44,7 +44,8 @@ Certifique-se de ter instalado:
  ## Configuração do JasperSoft Studio
 
 1. **Instalação do JasperSoft Studio:**
-   - Faça o download e instale o JasperSoft Studio em [community.jaspersoft.com](https://community.jaspersoft.com/project/jaspersoft-studio).
+   - Faça o download e instale o JasperSoft 6.20.5 Studio em [www.filehorse.com](https://www.filehorse.com/download-jaspersoft-studio/80534/download/).
+   - É importante que esta seja a versão para evitar problemas de compilação encontrados na versão mais recente  
    - Siga as instruções de instalação para o seu sistema operacional.
 
 2. **Configuração do Projeto:**
