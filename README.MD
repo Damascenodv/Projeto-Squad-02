@@ -53,8 +53,6 @@ Certifique-se de ter instalado:
    - Crie um novo projeto ou abra um existente.
    - Configure a conexão com o banco de dados PostgreSQL usando as mesmas informações de conexão fornecidas anteriormente.
 
-
-
 ## Utilização do Projeto
    **Para utilizar o projeto:**
    - Abra o arquivo index.html em PaginasWeb\html\index.html em seu navegador.
