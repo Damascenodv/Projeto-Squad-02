@@ -35,7 +35,7 @@ Certifique-se de ter instalado:
    spring.datasource.driver-class-name=org.postgresql.Driver
 
    spring.jpa.generate-ddl=true
-   spring.jpa.hibernate.ddl-auto=none
+   spring.jpa.hibernate.ddl-auto=create
    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
    ```
 
