@@ -96,8 +96,6 @@ function calcularObjeto(){
     let numeroFiliais = parseInt(document.getElementById('numeroFiliais').value);
     let possuiPlanoEstrategioc = document.getElementById('possuiPlanoEstrategico').checked ? 1 : 0;
     
-    
-
     camposPrechidosConfiguracoes(imposto,lucro,analistaJR,analistaSr,especialista)
 
     if(camposPrechidos(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc)){
@@ -116,8 +114,8 @@ function calcularObjeto(){
 window.onload = function(){
     getDados()
 }
-function carregarDadosBanco(numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc,impostop,lucrop,analistaJRp,analistaSrp,especialistap){
-    if(localStorage.length ==0){
+function carregarDadosBanco(codigo,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc,impostop,lucrop,analistaJRp,analistaSrp,especialistap){
+        localStorage.setItem("parCodigo", codigo);
         localStorage.setItem("imposto", impostop);
         localStorage.setItem("lucro", lucrop);
         localStorage.setItem("analistaJR", analistaJRp);
@@ -128,7 +126,6 @@ function carregarDadosBanco(numServioresFisicos,numeroColaboradores,numeroSistem
         localStorage.setItem("numeroSistemasUtilizados", numeroSistemasUtilizados);
         localStorage.setItem("numeroFiliais", numeroFiliais);
         localStorage.setItem("possuiPlanoEstrategioc", possuiPlanoEstrategioc);
-    }
 
 }
 
@@ -190,6 +187,7 @@ function enviarDadosParaServidor(){
         }else{
             enviarDadosParaServidorPost()
         }
+        getDados()
         
         return data;
     })
@@ -207,7 +205,7 @@ function enviarDadosResultados() {
             custoHH: parseFloat(localStorage.getItem("resultCustoHH")),
             valorVenda: parseFloat(localStorage.getItem("resultValorVenda")),
             parametro: {
-                codigo: 1,
+                codigo: localStorage.getItem("parCodigo"),
               
             }
         };
@@ -242,7 +240,7 @@ function getDados(){
        
               
         if(data.length >0){        
-            carregarDadosBanco(data[0].numServioresFisicos,data[0].numeroColaboradores,data[0].numeroSistemasUtilizados,data[0].numeroFiliais,data[0].possuiPlanoEstrategioc,data[0].imposto,data[0].lucro,data[0].analistaJR,data[0].analistaSr,data[0].especialista)
+            carregarDadosBanco(data[0].codigo,data[0].numServioresFisicos,data[0].numeroColaboradores,data[0].numeroSistemasUtilizados,data[0].numeroFiliais,data[0].possuiPlanoEstrategioc,data[0].imposto,data[0].lucro,data[0].analistaJR,data[0].analistaSr,data[0].especialista)
 
         }else{
             enviarDadosParaServidorPost();    
@@ -265,11 +263,11 @@ function enviarDadosParaServidorPut(codigo) {
             numeroSistemasUtilizados: parseInt(localStorage.getItem('numeroSistemasUtilizados')),
             numeroFiliais: parseInt(localStorage.getItem('numeroFiliais')),
             possuiPlanoEstrategioc: parseInt(localStorage.getItem('possuiPlanoEstrategico')),
-            imposto: parseFloat(localStorage.getItem('imposto')),
-            lucro: parseFloat(localStorage.getItem('lucro')),
-            analistaJR: parseFloat(localStorage.getItem('analistaJR')),
-            analistaSr: parseFloat(localStorage.getItem('analistaSr')),
-            especialista: parseFloat(localStorage.getItem('especialista'))
+            imposto: parseFloat(imposto*100),
+            lucro: parseFloat(lucro*100),
+            analistaJR: parseFloat(analistaJR),
+            analistaSr: parseFloat(analistaSr),
+            especialista: parseFloat(especialista)
         };
         console.log(dados,localStorage.getItem('numServioresFisicos'))
 
@@ -361,13 +359,14 @@ function gerarPDFoutraPagina() {
     }
 }
 function abrirRelatorio() {
+    calcularObjeto()
     
+    enviarDadosResultados()
     var relatorioURL = 'http://localhost:8082/relatorio';
-
     window.open(relatorioURL);
 }
 function gerarPDF() {
-    //gerarPDFFlutuante()
+    
     abrirRelatorio() 
   
 }
@@ -388,6 +387,7 @@ function gerarPDFFlutuante() {
   
 }
 function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){
+    enviarDadosParaServidor()
     localStorage.setItem('numServioresFisicos',numServioresFisicos);
     localStorage.setItem('numeroColaboradores',numeroColaboradores);
     localStorage.setItem('numeroSistemasUtilizados',numeroSistemasUtilizados);
@@ -408,7 +408,8 @@ function salvarCalculolocalSotrage(resultHorasAnlistaJunior,resultHorasAnlistaSe
     localStorage.setItem("HorasEspecialista", resultHorasEspecialista);
     localStorage.setItem("resultCustoHH", resultCustoHH);
     localStorage.setItem("resultValorVenda", resultValorVenda);
-    enviarDadosParaServidor()
+    
+    enviarDadosResultados()
 
 }
 function salvarCalculolocalHost(resultHorasAnlistaJunior,resultHorasAnlistaSenior,resultHorasEspecialista,resultCustoHH,resultValorVenda,numServioresFisicos,numeroColaboradores,numeroSistemasUtilizados,numeroFiliais,possuiPlanoEstrategioc){

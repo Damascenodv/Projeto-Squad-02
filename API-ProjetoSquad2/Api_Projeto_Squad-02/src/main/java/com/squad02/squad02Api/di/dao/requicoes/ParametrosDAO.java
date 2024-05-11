@@ -26,7 +26,7 @@ public class ParametrosDAO extends BaseJpqlDao implements Repositorio<Parametros
         ResultSet rs = null;
         try {
             Connection conn = dbConfiguration.getConnection();
-            pStatement = conn.prepareStatement("select " + CAMPOS + " from tb_par_parametro");
+            pStatement = conn.prepareStatement("select " + CAMPOS + " from tb_par_parametro order by par_codigo desc");
             rs = pStatement.executeQuery();
             return resutsetTransfer(rs);
 

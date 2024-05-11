@@ -198,6 +198,7 @@
                     document.getElementById("calculateButton").addEventListener("click", function(event) {
                         if(isCamposPrechidosConfiguracoes(document.getElementById("imposto").value ,document.getElementById("lucro").value ,document.getElementById("analistaJR").value ,document.getElementById("analistaSr").value,document.getElementById("especialista").value)){
                         saveDataToLocalStorage();
+                        enviarDadosParaServidor()
                         redirectToPage();
                         event.preventDefault(); 
                         }else{

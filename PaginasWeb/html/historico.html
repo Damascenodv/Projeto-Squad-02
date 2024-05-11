@@ -65,30 +65,31 @@
 
             function preencherGridHistorico(dados) {
                 const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const slicedData = dados.slice(startIndex, endIndex);
+                const endIndex = startIndex + itemsPerPage;
+                const slicedData = dados.slice(startIndex, endIndex);
 
-    const historicoGrid = document.getElementById("historicoGrid");
-    historicoGrid.innerHTML = ""; 
+                const historicoGrid = document.getElementById("historicoGrid");
+                historicoGrid.innerHTML = ""; 
 
-    slicedData.forEach(item => {
-        const card = document.createElement("div");
-        card.classList.add("card");
+                slicedData.forEach(item => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
 
-        const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
+                    const cardBody = document.createElement("div");
+                    cardBody.classList.add("card-body");
 
-        cardBody.innerHTML = `
-            <h5 class="card-title">Código: ${item.codigo}</h5>
-            <p class="card-text">Horas Análise Sênior: ${item.horasAnlistaSenior}</p>
-            <p class="card-text">Horas Análise Júnior: ${item.horasAnlistaJunior}</p>
-            <p class="card-text">Horas Especialista: ${item.horasEspecialista}</p>
-            <p class="card-text">Custo HH: ${item.custoHH}</p>
-            <p class="card-text">Valor Venda: ${item.valorVenda}</p>
-        `;
+                    cardBody.innerHTML = `
+                        <h5 class="card-title">Código: ${item.codigo}</h5>
+                        <p class="card-text">Horas Análise Sênior: ${item.horasAnlistaSenior}</p>
+                        <p class="card-text">Horas Análise Júnior: ${item.horasAnlistaJunior}</p>
+                        <p class="card-text">Horas Especialista: ${item.horasEspecialista}</p>
+                        <p class="card-text">Custo HH: ${item.custoHH}</p>
+                        <p class="card-text">Valor Venda: ${item.valorVenda}</p>
+                        <button class="btn btn-danger btn-excluir" data-codigo="${item.codigo}">Excluir</button>
+                    `;
 
-        card.appendChild(cardBody);
-        historicoGrid.appendChild(card);
+                    card.appendChild(cardBody);
+                    historicoGrid.appendChild(card);
                 });
             }
 
@@ -126,6 +127,30 @@
                     preencherPaginacao(data.length);
                 });
             }
+
+            function excluirRegistro(codigo) {
+                fetch(`http://localhost:8082/HistoricoCalculo/${codigo}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log(`Registro com código ${codigo} excluído com sucesso!`);
+                        carregarDadosHistorico();
+                    } else {
+                        console.error(`Erro ao excluir o registro com código ${codigo}:`, response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error(`Erro ao excluir o registro com código ${codigo}:`, error);
+                });
+            }
+
+            document.getElementById('historicoGrid').addEventListener('click', function(event) {
+                if (event.target.classList.contains('btn-excluir')) {
+                    const codigo = event.target.getAttribute('data-codigo');
+                    excluirRegistro(codigo);
+                }
+            });
 
             carregarDadosHistorico();
         });
